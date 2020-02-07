@@ -8,7 +8,7 @@
                         <ng-jsonschema-main entity="entity"></ng-jsonschema-main>
                     </div>
                     <div class="model-type-selector displaynone" id="model-type-selector">
-                        <ng-jsonschema-field type="model-selector-schema"></ng-jsonschema-field>
+                        <ng-jsonschema-selectschema [modelRef]="modelRef" [configs]="configs"></ng-jsonschema-selectschema>
                     </div>
                 </fieldset>
             </div>

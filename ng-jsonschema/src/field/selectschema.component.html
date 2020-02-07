@@ -1,0 +1,72 @@
+
+<!-- var modelSelectorSchema = ' -->
+
+<div class="model-type-selector-cont">
+    <div class="title t_color">Model Type</div>
+    <div class="selectmultiple">Hold Ctrl key to select multiple</div>
+    <div class="model-types">
+        <button type="button" class="btn btn-link btn-sm"
+            [ngClass]="configs.currModelType.indexOf('Array')>=0?'t_bg':''"
+            (click)="changeModelType('Array', entity, $event)" *ngIf="$mode != 'static'">Array</button>
+        <button type="button" class="btn btn-link btn-sm"
+            [ngClass]="configs.currModelType.indexOf('Boolean')>=0?'t_bg':''"
+            (click)="changeModelType('Boolean', entity, $event)">Boolean</button>
+        <button type="button" class="btn btn-link btn-sm"
+            [ngClass]="configs.currModelType.indexOf('Integer')>=0?'t_bg':''"
+            (click)="changeModelType('Integer', entity, $event)">Integer</button>
+        <button type="button" class="btn btn-link btn-sm"
+            [ngClass]="configs.currModelType.indexOf('Number')>=0?'t_bg':''"
+            (click)="changeModelType('Number', entity, $event)">Number</button>
+        <button type="button" class="btn btn-link btn-sm"
+            [ngClass]="configs.currModelType.indexOf('Null')>=0?'t_bg':''"
+            (click)="changeModelType('Null', entity, $event)"
+            *ngIf="$mode != 'list' && $mode != 'static'">null</button>
+        <button type="button" class="btn btn-link btn-sm"
+            [ngClass]="configs.currModelType.indexOf('Object')>=0?'t_bg':''"
+            (click)="changeModelType('Object', entity, $event)"
+            *ngIf="$mode != 'list' && $mode != 'static'">Object</button>
+        <button type="button" class="btn btn-link btn-sm"
+            [ngClass]="configs.currModelType.indexOf('String')>=0?'t_bg':''"
+            (click)="changeModelType('String', entity, $event)">String</button>
+        <button type="button" class="btn btn-link btn-sm"
+            [ngClass]="configs.currModelType.indexOf('$ref')>=0?'t_bg':''"
+            (click)="changeModelType('$ref', entity, $event)"
+            *ngIf="$mode != 'list' && $mode != 'static'">$ref</button>
+    </div>
+    <div *ngIf="configs.showMoreOptn == 'array'">
+        <div class="title t_color">Array Items Type</div>
+        <div class="array-items">
+            <button type="button" class="btn btn-link btn-sm" [ngClass]="selectedEntity._items[0]._type[0]?'':'t_bg'"
+                (click)="setArrayType('Unspecified', entity, $event)">Unspecified</button>
+            <button type="button" class="btn btn-link btn-sm"
+                [ngClass]="selectedEntity._items[0]._type[0]=='Integer'?'t_bg':''"
+                (click)="setArrayType('Integer', entity, $event)">Integer</button>
+            <button type="button" class="btn btn-link btn-sm"
+                [ngClass]="selectedEntity._items[0]._type[0]=='Boolean'?'t_bg':''"
+                (click)="setArrayType('Boolean', entity, $event)">Boolean</button>
+            <button type="button" class="btn btn-link btn-sm"
+                [ngClass]="selectedEntity._items[0]._type[0]=='Number'?'t_bg':''"
+                (click)="setArrayType('Number', entity, $event)">Number</button>
+            <button type="button" class="btn btn-link btn-sm"
+                [ngClass]="selectedEntity._items[0]._type[0]=='Object'?'t_bg':''"
+                (click)="setArrayType('Object', entity, $event)" *ngIf="$mode != 'list'">Object</button>
+            <button type="button" class="btn btn-link btn-sm"
+                [ngClass]="selectedEntity._items[0]._type[0]=='String'?'t_bg':''"
+                (click)="setArrayType('String', entity, $event)">String</button>
+            <button type="button" class="btn btn-link btn-sm"
+                [ngClass]="selectedEntity._items[0]._type[0]=='$ref'?'t_bg':''"
+                (click)="setArrayType('$ref', entity, $event)">$ref</button>
+        </div>
+    </div>
+    <div *ngIf="configs.showMoreOptn == '$ref' || configs.extraArrayOptn">
+        <div class="title t_color">Select model</div>
+        <div class="array-items">
+            <select class="setmodel" (click)="$event.stopPropagation()" 
+            (change)="setModelFor$Ref()"
+                [(ngModel)]="modelRef.model">
+                <option ng-repeat="(id, m) in $models; let $index = index" value="{{id}}">#/definitions/{{m.nameSpace}}
+                    ({{m.name}})</option>
+            </select>
+        </div>
+    </div>
+</div>

@@ -5,17 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { JsonSchemaComponent } from './jsonschema/jsonschema.component';
 import { MainJsonSchemaComponent } from './main/main.component';
 import { FieldJsonSchemaComponent } from './field/field.component';
+import { SelectSchemaJsonSchemaComponent } from './field/selectschema.component';
 
 export const CustomDirectives = [
   JsonSchemaComponent,
   MainJsonSchemaComponent,
-  FieldJsonSchemaComponent
+  FieldJsonSchemaComponent,
+  SelectSchemaJsonSchemaComponent
 ];
 
 export const NgBrDirectives = {
   JsonSchemaComponent,
   MainJsonSchemaComponent,
-  FieldJsonSchemaComponent
+  FieldJsonSchemaComponent,
+  SelectSchemaJsonSchemaComponent
 };
 
 @NgModule({
