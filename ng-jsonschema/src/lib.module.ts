@@ -1,13 +1,16 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { JsonSchemaComponent } from './jsonschema/jsonschema.component';
+import { MainJsonSchemaComponent } from './main/main.component';
 
 export const CustomDirectives = [
-  JsonSchemaComponent
+  JsonSchemaComponent,
+  MainJsonSchemaComponent
 ];
 
 export const NgBrDirectives = {
-  JsonSchemaComponent
+  JsonSchemaComponent,
+  MainJsonSchemaComponent
 };
 
 @NgModule({

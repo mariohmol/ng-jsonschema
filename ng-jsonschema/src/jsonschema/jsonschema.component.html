@@ -1,19 +1,20 @@
-<div class="json-schema" style="">\
-    <uib-tabset active="active">\
-        <uib-tab index="0" heading="Designer" select="convertSchema2Obj()">\
-            <div>\
-                <fieldset ng-disabled="readonly">\
-                    <div class="main" style="">\
-                        <div ng-include="\'main-schema.html\'"></div>\
-                    </div>\
-                    <div class="model-type-selector" id="model-type-selector" style="display: none">\
-                        <div ng-include="\'model-selector-schema.html\'"></div>\
-                    </div>\
-                </fieldset>\
-            </div>\
-        </uib-tab>\
-        <uib-tab index="1" heading="JSON Schema" select="convertObj2Schema()">\
-            <pre ui-ace="{mode: \'json\'}" ng-model="$schema.original" class="highlight">{{$schema.original}}</pre>\
-        </uib-tab>\
-    </uib-tabset>\
-</div>
+<section class="json-schema" style="">
+    <div active="active"> <!-- uib-tabset -->
+        <!-- uib-tab -->
+        <div index="0" heading="Designer" (click)="convertSchema2Obj()">
+            <div>
+                <fieldset ng-disabled="readonly">
+                    <div class="main" style="">
+                        <ng-main-jsonschema></ng-main-jsonschema>
+                    </div>
+                    <div class="model-type-selector" id="model-type-selector" style="display: none">
+                        <div ng-include="'model-selector-schema.html'"></div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div index="1" heading="JSON Schema" (click)="convertObj2Schema()">
+            <pre ui-ace="{mode: 'json'}" ng-model="$schema.original" class="highlight">{{$schema.original}}</pre>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,148 @@
+<div>
+    <div class="checkbox" style="padding: 2px 0;">
+        <label><input type="checkbox" class="small" ng-model="entity._disallowAdditional"> Disallow Additipnal Properties</label>
+    </div>
+</div>
+<div class="form-group col-xs-12">
+    <label class="model-label-x">minProperties:</label>
+    <input type="number" class="form-control sm detail-ip" ng-model="entity._minProperties" min="0" placeholder=">=0" />
+</div>
+<div class="form-group col-xs-12">
+    <label class="model-label-x">maxProperties:</label>
+    <input type="number" class="form-control sm detail-ip" ng-model="entity._maxProperties" min="0" placeholder=">=0" />
+</div>
+Object-schema.html
+
+
+<span uib-dropdownz class="dropdown">
+        <button type="button" uib-dropdown-togglez class="btn btn-link btn-href model-selector dropdown-toggle"  ng-click="openMenu(entity,$event)">
+            <span ng-repeat="t in entity._type">
+                <span ng-class="t">{{t}}</span><span ng-if="!$last" class="faint"> or </span> 
+            </span>
+            <span class="caret"></span>
+        </button>
+    </span>
+modelTypeSelector.html', modelTypeSelector);
+
+
+<div class="form-group col-xs-12">
+    <label class="model-label-x">minLength:</label>
+    <input type="number" class="form-control sm detail-ip" ng-model="entity._minLength" min="0" placeholder=">=0" />
+</div>
+<div class="form-group col-xs-12">
+    <label class="model-label-x">maxLength:</label>
+    <input type="number" class="form-control sm detail-ip" ng-model="entity._maxLength" min="0" placeholder=">=0" />
+</div>
+<div class="form-group col-xs-12">
+    <label class="model-label-x">Pattern:</label>
+    <input type="text" class="form-control sm detail-ip" ng-model="entity._pattern" min="0" />
+</div>
+<div class="form-group col-xs-12">
+    <label class="model-label-x">Format:</label>
+    <select class="form-control sm detail-ip" ng-model="entity._format">
+        <option value="">--no-format--</option>
+        <option value="email">email</option>
+        <option value="hostname">hostname</option>
+        <option value="date-time">date-time</option>
+        <option value="ipv4">ipv4</option>
+        <option value="ipv6">ipv6</option>
+        <option value="uri">uri</option>
+    </select>
+</div>
+<div class="form-group col-xs-12">
+    <label class="model-label-x">Enum:</label>
+    <textarea class="form-control sm detail-ip" ng-model="entity._enum" placeholder=""abcd", 1, 1.5,"etc""></textarea>
+</div>
+String-schema.html
+
+
+<div>
+    <div class="checkbox" style="padding: 2px 0;">
+        <label><input type="checkbox" class="small" ng-model="entity._uniqueItems"> Allow only unique items?</label>
+    </div>
+</div>
+<div class="form-group col-xs-12">
+    <label class="model-label-x">minItems:</label>
+    <input type="number" class="form-control sm detail-ip" ng-model="entity._minItems" min="0" placeholder=">=0" />
+</div>
+<div class="form-group col-xs-12">
+    <label class="model-label-x">maxItems:</label>
+    <input type="number" class="form-control sm detail-ip" ng-model="entity._maxItems" min="0" placeholder=">=0" />
+</div>';
+Array-schema.html', ArraySchema);
+
+
+var BooleanSchema = 'No validations for this type..';
+Boolean-schema.html', BooleanSchema);
+
+
+var IntNumSchema = '<div class="form-group col-xs-12">
+    <label class="model-label-x">minimum:</label>
+    <input type="number" class="form-control sm detail-ip" ng-model="entity._minimum" min="0" />
+    <label><input type="checkbox" class="small" ng-model="entity._exclusiveMinimum"> Exclude minimum ?</label>
+</div>
+<div class="form-group col-xs-12">
+    <label class="model-label-x">maximum:</label>
+    <input type="number" class="form-control sm detail-ip" ng-model="entity._maximum" min="0" />
+    <label><input type="checkbox" class="small" ng-model="entity._exclusiveMaximum"> Exclude maximum ?</label>
+</div>
+<div class="form-group col-xs-12">
+    <label class="model-label-x">multipleOf:</label>
+    <input type="number" class="form-control sm detail-ip" ng-model="entity._multipleOf" min="0" />
+</div>
+<div class="form-group col-xs-12">
+    <label class="model-label-x">Format:</label>
+    <select class="form-control sm detail-ip" ng-model="entity._format">
+        <option value="int32">int32</option>
+        <option value="int64">int64</option>
+    </select>
+</div>
+<div class="form-group col-xs-12">
+    <label class="model-label-x">Enum:</label>
+    <textarea class="form-control sm detail-ip" ng-model="entity._enum" placeholder=""abcd", 1, 1.5,"etc""></textarea>
+</div>';
+Integer-schema.html', IntNumSchema);
+
+
+var NullSchema = 'No validations for this type..';
+Null-schema.html', NullSchema);
+
+
+var $refSchema = 'No validations for this type..';
+$ref-schema.html', $refSchema);
+
+
+var modelSelectorSchema = '<div class="model-type-selector-cont">
+    <div class="title t_color">Model Type</div>
+    <div style="float: right;font-size: 12px;margin-top: -20px;">Hold Ctrl key to select multiple</div>
+    <div class="model-types">
+        <button type="button" class="btn btn-link btn-sm" ng-class="configs.currModelType.indexOf('Array')>=0?'t_bg':''" ng-click="changeModelType('Array', entity, $event)" ng-if="$mode != 'static'">Array</button>
+        <button type="button" class="btn btn-link btn-sm" ng-class="configs.currModelType.indexOf('Boolean')>=0?'t_bg':''" ng-click="changeModelType('Boolean', entity, $event)">Boolean</button>
+        <button type="button" class="btn btn-link btn-sm" ng-class="configs.currModelType.indexOf('Integer')>=0?'t_bg':''" ng-click="changeModelType('Integer', entity, $event)">Integer</button>
+        <button type="button" class="btn btn-link btn-sm" ng-class="configs.currModelType.indexOf('Number')>=0?'t_bg':''" ng-click="changeModelType('Number', entity, $event)">Number</button>
+        <button type="button" class="btn btn-link btn-sm" ng-class="configs.currModelType.indexOf('Null')>=0?'t_bg':''" ng-click="changeModelType('Null', entity, $event)" ng-if="$mode != 'list' && $mode != 'static'">null</button>
+        <button type="button" class="btn btn-link btn-sm" ng-class="configs.currModelType.indexOf('Object')>=0?'t_bg':''" ng-click="changeModelType('Object', entity, $event)" ng-if="$mode != 'list' && $mode != 'static'">Object</button>
+        <button type="button" class="btn btn-link btn-sm" ng-class="configs.currModelType.indexOf('String')>=0?'t_bg':''" ng-click="changeModelType('String', entity, $event)">String</button>
+        <button type="button" class="btn btn-link btn-sm" ng-class="configs.currModelType.indexOf('$ref')>=0?'t_bg':''" ng-click="changeModelType('$ref', entity, $event)" ng-if="$mode != 'list' && $mode != 'static'">$ref</button>
+    </div>
+    <div ng-if="configs.showMoreOptn == 'array'">
+        <div class="title t_color">Array Items Type</div>
+        <div class="array-items">
+            <button type="button" class="btn btn-link btn-sm" ng-class="selectedEntity._items[0]._type[0]?'':'t_bg'" ng-click="setArrayType('Unspecified', entity, $event)">Unspecified</button>
+            <button type="button" class="btn btn-link btn-sm" ng-class="selectedEntity._items[0]._type[0]=='Integer'?'t_bg':''" ng-click="setArrayType('Integer', entity, $event)">Integer</button>
+            <button type="button" class="btn btn-link btn-sm" ng-class="selectedEntity._items[0]._type[0]=='Boolean'?'t_bg':''" ng-click="setArrayType('Boolean', entity, $event)">Boolean</button>
+            <button type="button" class="btn btn-link btn-sm" ng-class="selectedEntity._items[0]._type[0]=='Number'?'t_bg':''" ng-click="setArrayType('Number', entity, $event)">Number</button>
+            <button type="button" class="btn btn-link btn-sm" ng-class="selectedEntity._items[0]._type[0]=='Object'?'t_bg':''" ng-click="setArrayType('Object', entity, $event)" ng-if="$mode != 'list'">Object</button>
+            <button type="button" class="btn btn-link btn-sm" ng-class="selectedEntity._items[0]._type[0]=='String'?'t_bg':''" ng-click="setArrayType('String', entity, $event)">String</button>
+            <button type="button" class="btn btn-link btn-sm" ng-class="selectedEntity._items[0]._type[0]=='$ref'?'t_bg':''" ng-click="setArrayType('$ref', entity, $event)">$ref</button>
+        </div>
+    </div>
+    <div ng-if="configs.showMoreOptn == '$ref' || configs.extraArrayOptn">
+        <div class="title t_color">Select model</div>
+        <div class="array-items">
+            <select ng-click="$event.stopPropagation()" ng-change="setModelFor$Ref()" style="height:24px" ng-model="modelRef.model">
+                <option ng-repeat="(id, m) in $models track by $index" value="{{id}}">#/definitions/{{m.nameSpace}} ({{m.name}})</option>
+            </select>
+        </div>
+    </div>
+</div>';

@@ -140,7 +140,7 @@ export class JsonSchemaService {
         return newStr;
     };
 
-    new$ref(key, value) {
+    new$ref(key, value = null) {
         const newRef: any = { ...{}, ...this.additional.for$ref };
         this._id_ += 1;
         newRef.__ID__ = '$model' + this._id_;
@@ -358,7 +358,7 @@ export class JsonSchemaService {
             if (!obj.hasOwnProperty(key)) {
                 obj[key] = val;
             }
-        });
+        };
     }
 
     schema2obj(schema, key, required, isRoot, modelObjs) {

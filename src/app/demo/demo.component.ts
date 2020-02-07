@@ -9,7 +9,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class DemoComponent implements OnInit {
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    console.log('Method not implemented.');
   }
 
   constructor(public fb: FormBuilder) {

@@ -5,7 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NgJsonSchema } from 'ng-jsonschema';
 import { DemoComponent } from './demo/demo.component';
-import { TextMaskModule } from 'angular2-text-mask';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/demo', pathMatch: 'full' },
@@ -20,7 +19,6 @@ export const routes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    TextMaskModule,
     NgJsonSchema,
     RouterModule.forRoot(routes)
   ],
