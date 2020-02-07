@@ -9,16 +9,20 @@
                 <span class="glyphicon t_color obj-exp"
                     [ngClass]="ctrl.expanded?'glyphicon-triangle-bottom':'glyphicon-triangle-right'"
                     (click)="ctrl.expanded=!ctrl.expanded" *ngIf="entity._type.indexOf('Object')>=0"></span>
-                <span [hidden]="entity.root$$"><input ng-readonly="$mode == 'static'" class="model-key" type="text"
-                        [(ngModel)]="entity._key" />:</span> <span uib-dropdown class="dropdown">
+                <span [hidden]="entity.root$$">
+                    <input ng-readonly="$mode == 'static'" class="model-key" type="text"
+                        [(ngModel)]="entity._key" />:</span>
+                <span uib-dropdown class="dropdown">
+
                     <button type="button" uib-dropdown-toggle
                         class="btn btn-link btn-href model-selector dropdown-toggle" (click)="openMenu(entity,$event)">
                         <span *ngFor="let t of entity._type">
                             <span [ngClass]="t">{{t}}</span>
                             <span *ngIf="t==='Array'" [ngClass]="entity._items[0]._type[0]" class="unspecified">[
-                                {{entity._items[0]._type[0]?entity._items[0]._type[0]:'Unspecified'}}<span
-                                    *ngIf="entity._items[0]._type[0]=='$ref'">
-                                    (#/definitions/{{$models[entity._items[0]._value].nameSpace}})</span> ]</span>
+                                {{entity._items[0]._type[0]?entity._items[0]._type[0]:'Unspecified'}}
+                                <span *ngIf="entity._items[0]._type[0]=='$ref'">
+                                    (#/definitions/{{$models[entity._items[0]._value].nameSpace}})</span> ]
+                            </span>
                             <span *ngIf="t==='$ref'"
                                 class="faint">(#/definitions/{{$models[entity._value].nameSpace}})</span>
                             <span *ngIf="!$last" class="faint"> or </span>
@@ -26,14 +30,17 @@
                         <span class="caret"></span>
                     </button>
                 </span>
-                <span *ngIf="entity._type.indexOf('Object')>=0"
-                    class="faint">{<span>{{entity._properties.length}}</span>}</span>
-                <div class="model-detail" [hidden]="showDetailsPan" (click)="showDetailsPan=true"><span
-                        class="glyphicon glyphicon-pencil""></span></div>
-        <div class=" model-done" *ngIf="showDetailsPan" (click)="showDetailsPan=false"><span
-                            class="glyphicon glyphicon-ok"></span></div>
+                <span *ngIf="entity._type.indexOf('Object')>=0" class="faint"> [
+                    <span>{{entity._properties.length}}</span> ]
+                </span>
+                <div class="model-detail" [hidden]="showDetailsPan" (click)="showDetailsPan=true">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </div>
+                <div class=" model-done" *ngIf="showDetailsPan" (click)="showDetailsPan=false">
+                    <span class="glyphicon glyphicon-ok"></span></div>
                 <button class="model-remove" *ngIf="!entity.root$$ && $mode != 'static'" type="button"
-                    (click)="removeEntity(entity)"><span class="glyphicon glyphicon-remove"></span></button>
+                    (click)="removeEntity(entity)"><span class="glyphicon glyphicon-remove"></span>
+                </button>
                 <div class="model-summary">
                     <span *ngIf="entity._description" class="icon bj-playlist_add_check ico"
                         uib-tooltip="Description present"></span>
@@ -44,15 +51,15 @@
             <span *ngIf="($mode == 'list' || $mode == 'static')&& entity.root$$">{{$msg}}</span>
         </div>
         <div class="model-det-cont" *ngIf="showDetailsPan">
-            <div class="col-xs-6" style="border-right:1px solid #9E9E9E">
-                <div class="t_color bold" style="margin-left:-10px">Basic Info</div>
+            <div class="col-xs-6 model-det-child">
+                <div class="t_color bold">Basic Info</div>
                 <div class="">
                     <form class="form-horizontal form-compact model-detail-form" name="detailForm" role="form">
                         <div class="form-group" *ngIf="!entity.root$$">
                             <label class="control-label col-xs-2">Name:</label>
                             <div class="col-xs-9">
                                 <input type="text" class="form-control sm detail-ip" id="foldName"
-                                    placeholder="Field Name" [(ngModel)]="entity._key">
+                                    placeholder="Field Name" [(ngModel)]="entity._key" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -75,8 +82,8 @@
                     <div *ngIf="!entity.root$$">
                         <div class="t_color">Common Validations</div>
                         <div>
-                            <div class="checkbox" style="padding: 2px 0;">
-                                <label><input type="checkbox" class="small" [(ngModel)]="entity._required"> Required
+                            <div class="checkbox padding">
+                                <label><input type="checkbox" class="small" [(ngModel)]="entity._required" /> Required
                                     ?</label>
                             </div>
                         </div>
@@ -91,16 +98,19 @@
             </div>
         </div>
         <div *ngIf="ctrl.expanded" class="objProps">
-            <div *ngFor="let prop of entity._properties track by $index" class="propCont">
-                <div *ngFor="let (key, entity) of prop track by $index">
-                    <ng-main-jsonschema></ng-main-jsonschema>
+            <div *ngFor="let prop of entity._properties; let $index = index" class="propCont">
+                <!-- let (key, entity) of prop; let $index = index; -->
+                <div *ngFor="let entity of prop; let $index = index;">
+                    <ng-main-jsonschema entity="entity"></ng-main-jsonschema>
                 </div>
             </div>
         </div>
-        <div *ngIf="entity._type.indexOf('Object')<0 && entity._items[0]._type[0]=='Object'"
-            *ngFor="let prop of entity._items[0]._properties track by $index" class="propCont">
-            <div *ngFor="let (key, entity) of prop track by $index">
-                <ng-main-jsonschema></ng-main-jsonschema>
+        <div *ngIf="entity._type.indexOf('Object')<0 && entity._items[0]._type[0]=='Object'">
+            <div *ngFor="let prop of entity._items[0]._properties; let $index = index" class="propCont">
+                <!-- let (key, entity) of prop; let $index = index -->
+                <div *ngFor="let entity of prop; let $index = index">
+                    <ng-main-jsonschema entity="entity"></ng-main-jsonschema>
+                </div>
             </div>
         </div>
     </fieldset>

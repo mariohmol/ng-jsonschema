@@ -1,21 +1,27 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 import { JsonSchemaComponent } from './jsonschema/jsonschema.component';
 import { MainJsonSchemaComponent } from './main/main.component';
+import { FieldJsonSchemaComponent } from './field/field.component';
 
 export const CustomDirectives = [
   JsonSchemaComponent,
-  MainJsonSchemaComponent
+  MainJsonSchemaComponent,
+  FieldJsonSchemaComponent
 ];
 
 export const NgBrDirectives = {
   JsonSchemaComponent,
-  MainJsonSchemaComponent
+  MainJsonSchemaComponent,
+  FieldJsonSchemaComponent
 };
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   declarations: [
     CustomDirectives

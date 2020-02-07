@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { JsonSchemaService } from '../jsonschema.service';
 
 @Component({
@@ -7,8 +7,13 @@ import { JsonSchemaService } from '../jsonschema.service';
     templateUrl: './jsonschema.component.html',
     providers: []
 })
-export class JsonSchemaComponent {
+export class JsonSchemaComponent implements OnInit {
+    @Input()
     $schema: any = {};
+
+    @Input()
+    $refModels: any = {};
+
     $models;
 
 
@@ -37,9 +42,11 @@ export class JsonSchemaComponent {
     selectedEntity;
     JsonSchema = new JsonSchemaService();
 
-    constructor() {
+    ngOnInit() {
         this.initRootElement();
-        //  initialize the root element
+        //  initialize the root
+        // this.data = JsonSchema.schema2obj(schema);
+        // this.data.root$$ = true; 
     }
 
     str(data) {
