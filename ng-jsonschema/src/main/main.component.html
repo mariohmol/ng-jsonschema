@@ -1,21 +1,21 @@
 <div class="objCont">
-    <fieldset ng-disabled="entity.disabled">
-        <div class="js-row" ng-class="showDetailsPan?'t_bg':''" ng-init="showDetailsPan=false;ctrl={expanded:true}">
+    <fieldset [disabled]="entity.disabled">
+        <div class="js-row" [ngClass]="showDetailsPan?'t_bg':''" ng-init="showDetailsPan=false;ctrl={expanded:true}">
             <button type="button" class="btn btn-link btn-href glyphicon glyphicon-plus obj-add"
-                ng-click="addNewProp(entity,$data,$event,entity._type.indexOf('Object')<0 && entity._items[0]._type[0]=='Object' ? true: false)"
-                ng-disabled="$mode == 'static'"
+                (click)="addNewProp(entity,$data,$event,entity._type.indexOf('Object')<0 && entity._items[0]._type[0]=='Object' ? true: false)"
+                [disabled]="$mode == 'static'"
                 *ngIf="(entity._type.indexOf('Object')>=0) || (entity._items[0]._type[0]=='Object')"></button>
-            <span ng-hide="($mode == 'list' || $mode == 'static')&& entity.root$$">
+            <span [hidden]="($mode == 'list' || $mode == 'static')&& entity.root$$">
                 <span class="glyphicon t_color obj-exp"
-                    ng-class="ctrl.expanded?'glyphicon-triangle-bottom':'glyphicon-triangle-right'"
-                    ng-click="ctrl.expanded=!ctrl.expanded" *ngIf="entity._type.indexOf('Object')>=0"></span>
-                <span ng-hide="entity.root$$"><input ng-readonly="$mode == 'static'" class="model-key" type="text"
-                        ng-model="entity._key" />:</span> <span uib-dropdown class="dropdown">
+                    [ngClass]="ctrl.expanded?'glyphicon-triangle-bottom':'glyphicon-triangle-right'"
+                    (click)="ctrl.expanded=!ctrl.expanded" *ngIf="entity._type.indexOf('Object')>=0"></span>
+                <span [hidden]="entity.root$$"><input ng-readonly="$mode == 'static'" class="model-key" type="text"
+                        [(ngModel)]="entity._key" />:</span> <span uib-dropdown class="dropdown">
                     <button type="button" uib-dropdown-toggle
-                        class="btn btn-link btn-href model-selector dropdown-toggle" ng-click="openMenu(entity,$event)">
+                        class="btn btn-link btn-href model-selector dropdown-toggle" (click)="openMenu(entity,$event)">
                         <span *ngFor="let t of entity._type">
-                            <span ng-class="t">{{t}}</span>
-                            <span *ngIf="t==='Array'" ng-class="entity._items[0]._type[0]" class="unspecified">[
+                            <span [ngClass]="t">{{t}}</span>
+                            <span *ngIf="t==='Array'" [ngClass]="entity._items[0]._type[0]" class="unspecified">[
                                 {{entity._items[0]._type[0]?entity._items[0]._type[0]:'Unspecified'}}<span
                                     *ngIf="entity._items[0]._type[0]=='$ref'">
                                     (#/definitions/{{$models[entity._items[0]._value].nameSpace}})</span> ]</span>
@@ -28,22 +28,22 @@
                 </span>
                 <span *ngIf="entity._type.indexOf('Object')>=0"
                     class="faint">{<span>{{entity._properties.length}}</span>}</span>
-                <div class="model-detail" ng-hide="showDetailsPan" ng-click="showDetailsPan=true"><span
+                <div class="model-detail" [hidden]="showDetailsPan" (click)="showDetailsPan=true"><span
                         class="glyphicon glyphicon-pencil""></span></div>
-        <div class=" model-done" ng-show="showDetailsPan" ng-click="showDetailsPan=false"><span
+        <div class=" model-done" *ngIf="showDetailsPan" (click)="showDetailsPan=false"><span
                             class="glyphicon glyphicon-ok"></span></div>
                 <button class="model-remove" *ngIf="!entity.root$$ && $mode != 'static'" type="button"
-                    ng-click="removeEntity(entity)"><span class="glyphicon glyphicon-remove"></span></button>
+                    (click)="removeEntity(entity)"><span class="glyphicon glyphicon-remove"></span></button>
                 <div class="model-summary">
-                    <span ng-show="entity._description" class="icon bj-playlist_add_check ico"
+                    <span *ngIf="entity._description" class="icon bj-playlist_add_check ico"
                         uib-tooltip="Description present"></span>
                     <span *ngIf="!entity.root$$"><input type="checkbox" class="small"
-                            ng-model="entity._required" />Required</span>
+                            [(ngModel)]="entity._required" />Required</span>
                 </div>
             </span>
-            <span ng-show="($mode == 'list' || $mode == 'static')&& entity.root$$">{{$msg}}</span>
+            <span *ngIf="($mode == 'list' || $mode == 'static')&& entity.root$$">{{$msg}}</span>
         </div>
-        <div class="model-det-cont" ng-show="showDetailsPan">
+        <div class="model-det-cont" *ngIf="showDetailsPan">
             <div class="col-xs-6" style="border-right:1px solid #9E9E9E">
                 <div class="t_color bold" style="margin-left:-10px">Basic Info</div>
                 <div class="">
@@ -52,19 +52,19 @@
                             <label class="control-label col-xs-2">Name:</label>
                             <div class="col-xs-9">
                                 <input type="text" class="form-control sm detail-ip" id="foldName"
-                                    placeholder="Field Name" ng-model="entity._key">
+                                    placeholder="Field Name" [(ngModel)]="entity._key">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-xs-2">Desc: </label>
                             <div class="col-xs-9">
-                                <textarea class="form-control" ng-model="entity._description"></textarea>
+                                <textarea class="form-control" [(ngModel)]="entity._description"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-xs-2">Default:</label>
                             <div class="col-xs-9">
-                                <input type="text" class="form-control sm detail-ip" ng-model="entity._default" />
+                                <input type="text" class="form-control sm detail-ip" [(ngModel)]="entity._default" />
                             </div>
                         </div>
                     </form>
@@ -76,20 +76,21 @@
                         <div class="t_color">Common Validations</div>
                         <div>
                             <div class="checkbox" style="padding: 2px 0;">
-                                <label><input type="checkbox" class="small" ng-model="entity._required"> Required
+                                <label><input type="checkbox" class="small" [(ngModel)]="entity._required"> Required
                                     ?</label>
                             </div>
                         </div>
                     </div>
                     <div *ngFor="let type of entity._type">
                         <div class="t_color">{{type}} Validations</div>
-                        <div *ngIf="type!== 'Integer' && type!== 'Number' " ng-include="type+'-schema.html'"></div>
-                        <div *ngIf="type== 'Integer' || type== 'Number' " ng-include="'Integer-schema.html'"></div>
+                        <ng-jsonschema-field type="type"></ng-jsonschema-field>
+                        <!-- <div *ngIf="type!== 'Integer' && type!== 'Number' " ng-include="type+'-schema.html'"></div> -->
+                        <!-- <div *ngIf="type== 'Integer' || type== 'Number' " ng-include="'Integer-schema.html'"></div> -->
                     </div>
                 </form>
             </div>
         </div>
-        <div ng-show="ctrl.expanded" class="objProps">
+        <div *ngIf="ctrl.expanded" class="objProps">
             <div *ngFor="let prop of entity._properties track by $index" class="propCont">
                 <div *ngFor="let (key, entity) of prop track by $index">
                     <ng-main-jsonschema></ng-main-jsonschema>
