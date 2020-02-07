@@ -361,7 +361,7 @@ export class JsonSchemaService {
         };
     }
 
-    schema2obj(schema, key, required, isRoot, modelObjs) {
+    schema2obj(schema, key = null, required = null, isRoot = null, modelObjs = null) {
         if (!schema) {
             schema = this.newObject('##ROOT##');
             schema.root$$ = true;
@@ -590,9 +590,11 @@ export class JsonSchemaService {
             }
         }
 
-        obj._required = required;
-        if (isRoot) {
-            obj.root$$ = true;
+        if (obj) {
+            obj._required = required;
+            if (isRoot) {
+                obj.root$$ = true;
+            }
         }
 
         return obj;

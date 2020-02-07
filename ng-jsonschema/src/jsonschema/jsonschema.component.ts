@@ -9,12 +9,12 @@ import { JsonSchemaService } from '../jsonschema.service';
 })
 export class JsonSchemaComponent implements OnInit {
     @Input()
-    $schema: any = {};
+    schema: any = {};
 
     @Input()
-    $refModels: any = {};
+    refModels: any = {};
 
-    $models;
+    models;
 
 
     //  restrict: 'A',
@@ -36,17 +36,16 @@ export class JsonSchemaComponent implements OnInit {
     modelRef: any = {
         model: 0
     };
-    $mode;
-    $data;
+    mode;
+    data;
     entity;
     selectedEntity;
     JsonSchema = new JsonSchemaService();
 
     ngOnInit() {
+        this.data = this.JsonSchema.schema2obj(this.schema);
+        this.data.root$$ = true;
         this.initRootElement();
-        //  initialize the root
-        // this.data = JsonSchema.schema2obj(schema);
-        // this.data.root$$ = true; 
     }
 
     str(data) {
@@ -54,17 +53,18 @@ export class JsonSchemaComponent implements OnInit {
     }
 
     initRootElement() {
-        this.$mode = this.$mode ? this.$mode : 'object';
-        if (this.$data) {
-            this.entity = this.$data;
-            this.JsonSchema._id_ = this.getLastModelId(this.$data, 0);
+        //  initialize the root
+        this.mode = this.mode ? this.mode : 'object';
+        if (this.data) {
+            this.entity = this.data;
+            this.JsonSchema._id_ = this.getLastModelId(this.data, 0);
             return;
         }
-        this.$data = this.JsonSchema.newObject('##ROOT##');
-        this.$data.root$$ = true;
+        this.data = this.JsonSchema.newObject('##ROOT##');
+        this.data.root$$ = true;
 
         //  initiate the entity used in all html templates;update whenever $data is changes (new opject is created)
-        this.entity = this.$data;
+        this.entity = this.data;
     }
 
     //  generates a model based on the type and key
@@ -268,9 +268,9 @@ export class JsonSchemaComponent implements OnInit {
     }
 
     removeEntity(entity) {
-        const res = this.removeModel(this.$data, entity.__ID__);
+        const res = this.removeModel(this.data, entity.__ID__);
         if (res !== undefined) {
-            this.$data._properties.splice(res, 1);
+            this.data._properties.splice(res, 1);
         }
     }
 
@@ -321,9 +321,9 @@ export class JsonSchemaComponent implements OnInit {
     }
 
     convertObj2Schema() {
-        const schema = this.JsonSchema.obj2schema(this.$data, this.$models);
-        console.log(this.$data);
-        this.$schema = {
+        const schema = this.JsonSchema.obj2schema(this.data, this.models);
+        console.log(this.data);
+        this.schema = {
             original: JSON.stringify(schema, null, '    '),
             dup: JSON.stringify(schema, null, '    ')
         };
@@ -331,8 +331,8 @@ export class JsonSchemaComponent implements OnInit {
     }
 
     convertSchema2Obj() {
-        if (this.$schema && this.$schema.original !== this.$schema.dup) {
-            this.$data = this.JsonSchema.schema2obj(this.$schema.original, undefined, undefined, true, this.$models);
+        if (this.schema && this.schema.original !== this.schema.dup) {
+            this.data = this.JsonSchema.schema2obj(this.schema.original, undefined, undefined, true, this.models);
         }
     }
 

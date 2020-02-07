@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     // tslint:disable-next-line: component-selector
-    selector: 'ng-main-jsonschema',
+    selector: 'ng-jsonschema-main',
     templateUrl: './main.component.html',
     providers: []
 })

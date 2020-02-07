@@ -1,11 +1,11 @@
-<section class="json-schema" *ngIf="entity && entity._type">
+<section class="json-schema">
     <div active="active"> <!-- uib-tabset -->
         <!-- uib-tab -->
         <div index="0" heading="Designer" (click)="convertSchema2Obj()">
             <div>
                 <fieldset [disabled]="readonly">
                     <div class="main">
-                        <ng-main-jsonschema entity="entity"></ng-main-jsonschema>
+                        <ng-jsonschema-main entity="entity"></ng-jsonschema-main>
                     </div>
                     <div class="model-type-selector displaynone" id="model-type-selector">
                         <ng-jsonschema-field type="model-selector-schema"></ng-jsonschema-field>

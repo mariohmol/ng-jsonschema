@@ -1,4 +1,4 @@
-<div class="objCont">
+<div class="objCont" *ngIf="entity && entity._type">
     <fieldset [disabled]="entity.disabled">
         <div class="js-row" [ngClass]="showDetailsPan?'t_bg':''" ng-init="showDetailsPan=false;ctrl={expanded:true}">
             <button type="button" class="btn btn-link btn-href glyphicon glyphicon-plus obj-add"
@@ -101,7 +101,7 @@
             <div *ngFor="let prop of entity._properties; let $index = index" class="propCont">
                 <!-- let (key, entity) of prop; let $index = index; -->
                 <div *ngFor="let entity of prop; let $index = index;">
-                    <ng-main-jsonschema entity="entity"></ng-main-jsonschema>
+                    <ng-jsonschema-main entity="entity"></ng-jsonschema-main>
                 </div>
             </div>
         </div>
@@ -109,7 +109,7 @@
             <div *ngFor="let prop of entity._items[0]._properties; let $index = index" class="propCont">
                 <!-- let (key, entity) of prop; let $index = index -->
                 <div *ngFor="let entity of prop; let $index = index">
-                    <ng-main-jsonschema entity="entity"></ng-main-jsonschema>
+                    <ng-jsonschema-main entity="entity"></ng-jsonschema-main>
                 </div>
             </div>
         </div>
