@@ -1,10 +1,10 @@
 <div class="objCont" *ngIf="entity && entity._type">
     <fieldset [disabled]="entity.disabled">
-        <div class="js-row" [ngClass]="showDetailsPan?'t_bg':''" ng-init="showDetailsPan=false;ctrl={expanded:true}">
+        <div class="js-row" [ngClass]="showDetailsPan?'t_bg':''" >
             <button type="button" class="btn btn-link btn-href glyphicon glyphicon-plus obj-add"
-                (click)="addNewProp(entity,$data,$event,entity._type.indexOf('Object')<0 && entity._items[0]._type[0]=='Object' ? true: false)"
+                (click)="addNewProp(entity,$data,$event,entity._type.indexOf('Object')<0 && checkTypeObject(entity) ? true: false)"
                 [disabled]="$mode == 'static'"
-                *ngIf="(entity._type.indexOf('Object')>=0) || (entity._items[0]._type[0]=='Object')"></button>
+                *ngIf="(entity._type.indexOf('Object')>=0) || checkTypeObject(entity)"></button>
             <span [hidden]="($mode == 'list' || $mode == 'static')&& entity.root$$">
                 <span class="glyphicon t_color obj-exp"
                     [ngClass]="ctrl.expanded?'glyphicon-triangle-bottom':'glyphicon-triangle-right'"
@@ -90,7 +90,7 @@
                     </div>
                     <div *ngFor="let type of entity._type">
                         <div class="t_color">{{type}} Validations</div>
-                        <ng-jsonschema-field type="type"></ng-jsonschema-field>
+                        <ng-jsonschema-field [type]="type"></ng-jsonschema-field>
                         <!-- <div *ngIf="type!== 'Integer' && type!== 'Number' " ng-include="type+'-schema.html'"></div> -->
                         <!-- <div *ngIf="type== 'Integer' || type== 'Number' " ng-include="'Integer-schema.html'"></div> -->
                     </div>
@@ -100,16 +100,16 @@
         <div *ngIf="ctrl.expanded" class="objProps">
             <div *ngFor="let prop of entity._properties; let $index = index" class="propCont">
                 <!-- let (key, entity) of prop; let $index = index; -->
-                <div *ngFor="let entity of prop; let $index = index;">
-                    <ng-jsonschema-main entity="entity"></ng-jsonschema-main>
+                <div *ngFor="let key of keys(prop); let $index = index;">
+                    <ng-jsonschema-main [entity]="prop[key]"></ng-jsonschema-main>
                 </div>
             </div>
         </div>
-        <div *ngIf="entity._type.indexOf('Object')<0 && entity._items[0]._type[0]=='Object'">
+        <div *ngIf="entity._type.indexOf('Object')<0 && checkTypeObject(entity)">
             <div *ngFor="let prop of entity._items[0]._properties; let $index = index" class="propCont">
                 <!-- let (key, entity) of prop; let $index = index -->
-                <div *ngFor="let entity of prop; let $index = index">
-                    <ng-jsonschema-main entity="entity"></ng-jsonschema-main>
+                <div *ngFor="let key of keys(prop); let $index = index; ">
+                    <ng-jsonschema-main [entity]="prop[key]"></ng-jsonschema-main>
                 </div>
             </div>
         </div>

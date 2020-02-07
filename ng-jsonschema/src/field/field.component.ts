@@ -9,4 +9,7 @@ import { Component, Input } from '@angular/core';
 export class FieldJsonSchemaComponent {
     @Input()
     type;
+
+    @Input()
+    openMenu;
 }

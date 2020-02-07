@@ -1,0 +1,30 @@
+import { Injectable } from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs';
+
+@Injectable()
+export class StateService {
+
+    private initialState = { showSelectorModal: false };
+    private stateTracker = new BehaviorSubject<any>(this.initialState);
+
+    constructor() { }
+    /** Allows subscription to the behavior subject as an observable */
+    getState(): Observable<any> {
+        return this.stateTracker.asObservable();
+    }
+
+    /**
+     * Allows updating the current value of the behavior subject
+     * @param val a number representing the current value
+     * @param delta a number representing the positive or negative change in current value
+     */
+    setSelectorModel(sel): void {
+        console.log(this.stateTracker)
+        this.stateTracker.next({ showSelectorModal: sel });
+    }
+
+    /** Resets the count to the initial value */
+    resetState(): void {
+        this.stateTracker.next(this.initialState);
+    }
+}

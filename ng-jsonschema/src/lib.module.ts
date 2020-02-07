@@ -6,6 +6,7 @@ import { JsonSchemaComponent } from './jsonschema/jsonschema.component';
 import { MainJsonSchemaComponent } from './main/main.component';
 import { FieldJsonSchemaComponent } from './field/field.component';
 import { SelectSchemaJsonSchemaComponent } from './field/selectschema.component';
+import { StateService } from './state.service';
 
 export const CustomDirectives = [
   JsonSchemaComponent,
@@ -31,6 +32,9 @@ export const NgBrDirectives = {
   ],
   exports: [
     CustomDirectives
+  ],
+  providers: [
+    StateService
   ]
 })
 class NgJsonSchema {
