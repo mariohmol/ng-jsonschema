@@ -19,7 +19,6 @@ export class StateService {
      * @param delta a number representing the positive or negative change in current value
      */
     setSelectorModel(sel): void {
-        console.log(this.stateTracker)
         this.stateTracker.next({ showSelectorModal: sel });
     }
 

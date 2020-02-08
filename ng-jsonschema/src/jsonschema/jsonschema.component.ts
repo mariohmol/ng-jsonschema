@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { JsonSchemaService } from '../jsonschema.service';
 import { StateService } from '../state.service';
 
@@ -6,7 +6,9 @@ import { StateService } from '../state.service';
     //  tslint:disable-next-line: component-selector
     selector: 'ng-jsonschema',
     templateUrl: './jsonschema.component.html',
-    providers: []
+    providers: [],
+    styleUrls: ['./jsonschema.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class JsonSchemaComponent implements OnInit {
     @Input()
@@ -111,24 +113,6 @@ export class JsonSchemaComponent implements OnInit {
         return newModel;
     }
 
-
-
-    // openMenu(entity, e) {
-    //     const target = e.currentTarget;
-    //     // this.showSelector = true;
-    //     this.modelChangesCallback(entity);
-    //     const left = e.clientX;
-    //     let top = e.clientY + 15;
-    //     const popHeight = 270; // max height of the popup
-    //     const winHeight = window.innerHeight;
-    //     if (winHeight - top < popHeight) {
-    //         top = winHeight - popHeight;
-    //     }
-    //     // TODO: angular.element(target).parents('.json-schema').find('#model-type-selector')
-    //     // .css({ 'top': top + 'px', 'left': left + 'px' }).show();
-    //     e.preventDefault();
-    //     e.stopPropagation();
-    // };
 
     // recursively fine the parent and add the entity
     addNewProp(entity, data, e, forArray) {
@@ -332,8 +316,32 @@ export class JsonSchemaComponent implements OnInit {
 
         return lastId;
     }
-
-    toggleSelectorModal() {
+    /**
+     *
+     * @param entity
+     *
+     *
+     *
+        // openMenu(entity, e) {
+        //     const target = e.currentTarget;
+        //     // this.showSelector = true;
+        //     this.modelChangesCallback(entity);
+        //     const left = e.clientX;
+        //     let top = e.clientY + 15;
+        //     const popHeight = 270; // max height of the popup
+        //     const winHeight = window.innerHeight;
+        //     if (winHeight - top < popHeight) {
+        //         top = winHeight - popHeight;
+        //     }
+        //     // TODO: angular.element(target).parents('.json-schema').find('#model-type-selector')
+        //     // .css({ 'top': top + 'px', 'left': left + 'px' }).show();
+        //     e.preventDefault();
+        //     e.stopPropagation();
+        // };
+     */
+    toggleSelectorModal(entity, e =null) {
+        console.log(entity, e)
+        this.modelChangesCallback(entity);
         this.state.setSelectorModel(!this.showSelectorModal);
     }
 }

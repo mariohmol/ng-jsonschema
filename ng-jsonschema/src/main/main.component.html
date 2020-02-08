@@ -101,7 +101,7 @@
             <div *ngFor="let prop of entity._properties; let $index = index" class="propCont">
                 <!-- let (key, entity) of prop; let $index = index; -->
                 <div *ngFor="let key of keys(prop); let $index = index;">
-                    <ng-jsonschema-main [entity]="prop[key]"></ng-jsonschema-main>
+                    <ng-jsonschema-main [openMenu]="openMenu" [entity]="prop[key]"></ng-jsonschema-main>
                 </div>
             </div>
         </div>
@@ -109,7 +109,7 @@
             <div *ngFor="let prop of entity._items[0]._properties; let $index = index" class="propCont">
                 <!-- let (key, entity) of prop; let $index = index -->
                 <div *ngFor="let key of keys(prop); let $index = index; ">
-                    <ng-jsonschema-main [entity]="prop[key]"></ng-jsonschema-main>
+                    <ng-jsonschema-main [openMenu]="openMenu" [entity]="prop[key]"></ng-jsonschema-main>
                 </div>
             </div>
         </div>

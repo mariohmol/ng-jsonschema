@@ -6,11 +6,14 @@
                 <fieldset [disabled]="readonly">
                     <div class="main">
                         <ng-jsonschema-main 
-                        [openMenu]="toggleSelectorModal"
+                        [openMenu]="toggleSelectorModal.bind(this)"
                         [entity]="entity" ></ng-jsonschema-main>
                     </div>
                     <div *ngIf="showSelectorModal" class="model-type-selector" id="model-type-selector">
-                        <ng-jsonschema-selectschema [modelRef]="modelRef" [configs]="configs"></ng-jsonschema-selectschema>
+                        <ng-jsonschema-selectschema 
+                        [selectedEntity]="selectedEntity"
+                        [modelChangesCallback]="modelChangesCallback.bind(this)"
+                        [modelRef]="modelRef" [configs]="configs"></ng-jsonschema-selectschema>
                     </div>
                 </fieldset>
             </div>

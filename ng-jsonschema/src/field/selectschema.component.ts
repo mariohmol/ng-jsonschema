@@ -14,8 +14,12 @@ export class SelectSchemaJsonSchemaComponent {
     @Input()
     modelRef;
 
+    @Input()
+    modelChangesCallback;
+
     JsonSchema = new JsonSchemaService();
 
+    @Input()
     selectedEntity;
 
 
@@ -46,25 +50,6 @@ export class SelectSchemaJsonSchemaComponent {
         if (event) {
             event.stopPropagation();
         }
-    };
-
-    // callback after the model changed
-    modelChangesCallback(entity) {
-        this.configs.currModelType = entity._type;
-        this.selectedEntity = entity;
-        if (entity._type.indexOf('Array') >= 0) {
-            this.configs.showMoreOptn = 'array';
-            if (entity._type.indexOf('$ref') >= 0) {
-                this.configs.showMoreOptn = 'Array$ref';
-                this.modelRef.model = '';
-            }
-        } else if (entity._type.indexOf('$ref') >= 0) {
-            this.configs.showMoreOptn = '$ref';
-            this.modelRef.model = '';
-        } else {
-            this.configs.showMoreOptn = '';
-        }
-        this.configs.extraArrayOptn = false;
     };
 
     manageModelProps(type, entity, action) {
