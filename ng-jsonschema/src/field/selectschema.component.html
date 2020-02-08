@@ -7,7 +7,7 @@
     <div class="model-types">
         <button type="button" class="btn btn-link btn-sm"
             [ngClass]="configs.currModelType.indexOf('Array')>=0?'t_bg':''"
-            (click)="changeModelType('Array', entity, $event)" *ngIf="$mode != 'static'">Array</button>
+            (click)="changeModelType('Array', entity, $event)" *ngIf="mode != 'static'">Array</button>
         <button type="button" class="btn btn-link btn-sm"
             [ngClass]="configs.currModelType.indexOf('Boolean')>=0?'t_bg':''"
             (click)="changeModelType('Boolean', entity, $event)">Boolean</button>
@@ -20,22 +20,22 @@
         <button type="button" class="btn btn-link btn-sm"
             [ngClass]="configs.currModelType.indexOf('Null')>=0?'t_bg':''"
             (click)="changeModelType('Null', entity, $event)"
-            *ngIf="$mode != 'list' && $mode != 'static'">null</button>
+            *ngIf="mode != 'list' && mode != 'static'">null</button>
         <button type="button" class="btn btn-link btn-sm"
             [ngClass]="configs.currModelType.indexOf('Object')>=0?'t_bg':''"
             (click)="changeModelType('Object', entity, $event)"
-            *ngIf="$mode != 'list' && $mode != 'static'">Object</button>
+            *ngIf="mode != 'list' && mode != 'static'">Object</button>
         <button type="button" class="btn btn-link btn-sm"
             [ngClass]="configs.currModelType.indexOf('String')>=0?'t_bg':''"
             (click)="changeModelType('String', entity, $event)">String</button>
         <button type="button" class="btn btn-link btn-sm"
             [ngClass]="configs.currModelType.indexOf('$ref')>=0?'t_bg':''"
             (click)="changeModelType('$ref', entity, $event)"
-            *ngIf="$mode != 'list' && $mode != 'static'">$ref</button>
+            *ngIf="mode != 'list' && mode != 'static'">$ref</button>
     </div>
     <div *ngIf="configs.showMoreOptn == 'array'">
         <div class="title t_color">Array Items Type</div>
-        <div class="array-items">
+        <div class="array-items" *ngIf="selectedEntity._items[0]">
             <button type="button" class="btn btn-link btn-sm" [ngClass]="selectedEntity._items[0]._type[0]?'':'t_bg'"
                 (click)="setArrayType('Unspecified', entity, $event)">Unspecified</button>
             <button type="button" class="btn btn-link btn-sm"
@@ -49,7 +49,7 @@
                 (click)="setArrayType('Number', entity, $event)">Number</button>
             <button type="button" class="btn btn-link btn-sm"
                 [ngClass]="selectedEntity._items[0]._type[0]=='Object'?'t_bg':''"
-                (click)="setArrayType('Object', entity, $event)" *ngIf="$mode != 'list'">Object</button>
+                (click)="setArrayType('Object', entity, $event)" *ngIf="mode != 'list'">Object</button>
             <button type="button" class="btn btn-link btn-sm"
                 [ngClass]="selectedEntity._items[0]._type[0]=='String'?'t_bg':''"
                 (click)="setArrayType('String', entity, $event)">String</button>
@@ -64,8 +64,8 @@
             <select class="setmodel" (click)="$event.stopPropagation()" 
             (change)="setModelFor$Ref()"
                 [(ngModel)]="modelRef.model">
-                <option ng-repeat="(id, m) in $models; let $index = index" value="{{id}}">#/definitions/{{m.nameSpace}}
-                    ({{m.name}})</option>
+                <option *ngFor="let id of keys(models)" value="{{id}}">#/definitions/{{models[id].nameSpace}}
+                    ({{models[id].name}})</option>
             </select>
         </div>
     </div>

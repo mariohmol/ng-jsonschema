@@ -90,4 +90,8 @@ export class SelectSchemaJsonSchemaComponent {
             }
         };
     }
+
+    keys(obj) {
+        return Object.keys(obj);
+    }
 }

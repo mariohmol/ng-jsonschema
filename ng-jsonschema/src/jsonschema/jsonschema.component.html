@@ -1,7 +1,13 @@
 <section class="json-schema">
     <div active="active"> <!-- uib-tabset -->
         <!-- uib-tab -->
-        <div index="0" heading="Designer" (click)="convertSchema2Obj()">
+
+        <div class="w3-bar w3-black">
+            <button (click)="convertSchema2Obj()">Designer</button>
+            <button (click)="convertObj2Schema()">JSON Schema</button>
+          </div>
+
+        <div index="0" heading="Designer" *ngIf="heading==='Designer'">
             <div>
                 <fieldset [disabled]="readonly">
                     <div class="main">
@@ -18,7 +24,7 @@
                 </fieldset>
             </div>
         </div>
-        <div index="1" heading="JSON Schema" (click)="convertObj2Schema()">
+        <div index="1" heading="JSON Schema" *ngIf="heading==='JSON Schema'">
             <!-- TODO -->
             <!-- <pre ui-ace="{mode: 'json'}" [(ngModel)]="$schema.original" class="highlight">{{$schema.original}}</pre> -->
         </div>

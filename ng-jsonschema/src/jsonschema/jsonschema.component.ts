@@ -20,6 +20,8 @@ export class JsonSchemaComponent implements OnInit {
     showSelectorModal = false;
     models;
 
+    heading = 'Designer';
+
 
     //  restrict: 'A',
     //  scope: {
@@ -138,7 +140,7 @@ export class JsonSchemaComponent implements OnInit {
              for (let i = 0; i < data._properties.length; i++) {
                  let o = data._properties[i];
                  angular.forEach(o, function (val, key) {
-                     $scope.addNewProp(entity, val, e);
+                     this.addNewProp(entity, val, e);
                  });
              }
          }*/
@@ -257,6 +259,7 @@ export class JsonSchemaComponent implements OnInit {
             original: JSON.stringify(schema, null, '    '),
             dup: JSON.stringify(schema, null, '    ')
         };
+        this.heading = 'JSON Schema';
 
     }
 
@@ -264,10 +267,11 @@ export class JsonSchemaComponent implements OnInit {
         if (this.schema && this.schema.original !== this.schema.dup) {
             this.data = this.JsonSchema.schema2obj(this.schema.original, undefined, undefined, true, this.models);
         }
+        this.heading = 'Designer';
     }
 
-    // $scope.$watch(function() {
-    //     return $scope.$data;
+    // $watch(function() {
+    //     return this.$data;
     // }, function() {
     //     initRootElement();
     // });

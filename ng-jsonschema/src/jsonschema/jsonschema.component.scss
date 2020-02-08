@@ -1,5 +1,3 @@
-
-
 input[type="checkbox"].small:after {
     width: 12px;
     height: 12px;
@@ -287,6 +285,10 @@ input.model-key[readonly] {
 
 .Object {
     color: #2196f3 !important;
+}
+
+fieldset {
+    border: none;
 }
 
 .unspecified {

@@ -81,10 +81,6 @@
     </div>
 </div>
 
-
-<!-- var BooleanSchema = 'No validations for this type..'; -->
-<!-- Boolean-schema.html', BooleanSchema); -->
-
 <!-- Integer-schema.html', IntNumSchema); -->
 <div *ngIf="type=='Integer'">
     <div class="form-group col-xs-12">
@@ -114,11 +110,14 @@
     </div>
 </div>
 
+<div *ngIf="type=='Boolean'">
+    No validations for this type..
+</div>
 
+<div *ngIf="type=='Null'">
+    No validations for this type..
+</div>
 
-<!-- var NullSchema = 'No validations for this type..';
-Null-schema.html', NullSchema);
-
-
-var $refSchema = 'No validations for this type..';
-$ref-schema.html', $refSchema); -->
+<div *ngIf="type=='refSchema'">
+    No validations for this type..
+</div>
