@@ -12,4 +12,7 @@ export class FieldJsonSchemaComponent {
 
     @Input()
     openMenu;
+
+    @Input()
+    entity = {};
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { JsonSchemaService } from '../jsonschema.service';
 import { StateService } from '../state.service';
-
+import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
 @Component({
     //  tslint:disable-next-line: component-selector
     selector: 'ng-jsonschema',
@@ -11,6 +11,10 @@ import { StateService } from '../state.service';
     encapsulation: ViewEncapsulation.None
 })
 export class JsonSchemaComponent implements OnInit {
+    public editorOptions: JsonEditorOptions;
+
+    @ViewChild(JsonEditorComponent) editor: JsonEditorComponent; // , { static: true }
+
     @Input()
     schema: any = {};
 
@@ -49,6 +53,10 @@ export class JsonSchemaComponent implements OnInit {
     JsonSchema = new JsonSchemaService();
 
     constructor(private state: StateService) {
+        this.editorOptions = new JsonEditorOptions()
+        this.editorOptions.modes = ['code', 'text', 'tree', 'view']; // set all allowed modes
+        //this.options.mode = 'code'; //set only one mode
+
         this.state.getState().subscribe(
             res => {
                 this.showSelectorModal = res.showSelectorModal;
@@ -343,7 +351,7 @@ export class JsonSchemaComponent implements OnInit {
         //     e.stopPropagation();
         // };
      */
-    toggleSelectorModal(entity, e =null) {
+    toggleSelectorModal(entity, e = null) {
         console.log(entity, e)
         this.modelChangesCallback(entity);
         this.state.setSelectorModel(!this.showSelectorModal);

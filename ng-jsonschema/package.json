@@ -19,7 +19,8 @@
     "@angular/common": ">=4.0.0 <8.0.0"
   },
   "dependencies": {
-    "js-brasil": ">=2.0.7"
+    "ang-jsoneditor": "*",
+    "jsoneditor": "*"
   },
   "ngPackage": {
     "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
@@ -29,7 +30,7 @@
     },
     "dest": "../dist/ng-jsonschema",
     "whitelistedNonPeerDependencies": [
-      "js-brasil"
+      "ang-jsoneditor", "jsoneditor"
     ]
   }
 }
