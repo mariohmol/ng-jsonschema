@@ -16,6 +16,9 @@ export class MainJsonSchemaComponent implements OnInit {
     @Input()
     removeEntity;
 
+    @Input()
+    addNewProp;
+
     showDetailsPan = false;
     ctrl = {
         expanded: true

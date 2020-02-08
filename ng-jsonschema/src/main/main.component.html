@@ -21,7 +21,8 @@
                         class="btn btn-link btn-href model-selector dropdown-toggle" (click)="openMenu(entity,$event)">
                         <span *ngFor="let t of entity._type">
                             <span [ngClass]="t">{{t}}</span>
-                            <span *ngIf="t==='Array' && entity._items[0]" [ngClass]="entity._items[0]._type[0]" class="unspecified">[
+                            <span *ngIf="t==='Array' && entity._items[0]" [ngClass]="entity._items[0]._type[0]"
+                                class="unspecified">[
                                 {{entity._items[0]._type[0]?entity._items[0]._type[0]:'Unspecified'}}
                                 <span *ngIf="entity._items[0]._type[0]=='$ref'">
                                     (#/definitions/{{$models[entity._items[0]._value].nameSpace}})</span> ]
@@ -106,18 +107,16 @@
         <div *ngIf="ctrl.expanded" class="objProps">
             <div *ngFor="let prop of entity._properties" class="propCont">
                 <div *ngFor="let key of keys(prop);">
-                    <ng-jsonschema-main 
-                    [removeEntity]="removeEntity"
-                    [openMenu]="openMenu" [entity]="prop[key]"></ng-jsonschema-main>
+                    <ng-jsonschema-main [addNewProp]="addNewProp" [removeEntity]="removeEntity" [openMenu]="openMenu"
+                        [entity]="prop[key]"></ng-jsonschema-main>
                 </div>
             </div>
         </div>
         <div *ngIf="entity._type.indexOf('Object')<0 && checkTypeObject(entity) && entity._items[0]">
             <div *ngFor="let prop of entity._items[0]._properties" class="propCont">
                 <div *ngFor="let key of keys(prop); ">
-                    <ng-jsonschema-main 
-                    [removeEntity]="removeEntity"
-                    [openMenu]="openMenu" [entity]="prop[key]"></ng-jsonschema-main>
+                    <ng-jsonschema-main [addNewProp]="addNewProp" [removeEntity]="removeEntity" [openMenu]="openMenu"
+                        [entity]="prop[key]"></ng-jsonschema-main>
                 </div>
             </div>
         </div>
