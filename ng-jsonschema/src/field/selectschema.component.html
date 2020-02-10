@@ -39,26 +39,26 @@
     </div>
     <div *ngIf="configs.showMoreOptn == 'array'">
         <div class="title t_color">Array Items Type</div>
-        <div class="array-items" *ngIf="selectedEntity._items[0]">
-            <button type="button" class="btn btn-link btn-sm" [ngClass]="selectedEntity._items[0]._type[0]?'':'t_bg'"
+        <div class="array-items">
+            <button type="button" class="btn btn-link btn-sm" [ngClass]="selectedEntity._items[0] && selectedEntity._items[0]._type[0]?'':'t_bg'"
                 (click)="setArrayType('Unspecified', entity, $event)">Unspecified</button>
             <button type="button" class="btn btn-link btn-sm"
-                [ngClass]="selectedEntity._items[0]._type[0]=='Integer'?'t_bg':''"
+                [ngClass]="selectedEntity._items[0] && selectedEntity._items[0]._type[0]=='Integer'?'t_bg':''"
                 (click)="setArrayType('Integer', entity, $event)">Integer</button>
             <button type="button" class="btn btn-link btn-sm"
-                [ngClass]="selectedEntity._items[0]._type[0]=='Boolean'?'t_bg':''"
+                [ngClass]="selectedEntity._items[0] && selectedEntity._items[0]._type[0]=='Boolean'?'t_bg':''"
                 (click)="setArrayType('Boolean', entity, $event)">Boolean</button>
             <button type="button" class="btn btn-link btn-sm"
-                [ngClass]="selectedEntity._items[0]._type[0]=='Number'?'t_bg':''"
+                [ngClass]="selectedEntity._items[0] && selectedEntity._items[0]._type[0]=='Number'?'t_bg':''"
                 (click)="setArrayType('Number', entity, $event)">Number</button>
             <button type="button" class="btn btn-link btn-sm"
-                [ngClass]="selectedEntity._items[0]._type[0]=='Object'?'t_bg':''"
+                [ngClass]="selectedEntity._items[0] && selectedEntity._items[0]._type[0]=='Object'?'t_bg':''"
                 (click)="setArrayType('Object', entity, $event)" *ngIf="mode != 'list'">Object</button>
             <button type="button" class="btn btn-link btn-sm"
-                [ngClass]="selectedEntity._items[0]._type[0]=='String'?'t_bg':''"
+                [ngClass]="selectedEntity._items[0] && selectedEntity._items[0]._type[0]=='String'?'t_bg':''"
                 (click)="setArrayType('String', entity, $event)">String</button>
             <button type="button" class="btn btn-link btn-sm"
-                [ngClass]="selectedEntity._items[0]._type[0]=='$ref'?'t_bg':''"
+                [ngClass]="selectedEntity._items[0] && selectedEntity._items[0]._type[0]=='$ref'?'t_bg':''"
                 (click)="setArrayType('$ref', entity, $event)">$ref</button>
         </div>
     </div>

@@ -23,6 +23,9 @@ export class SelectSchemaJsonSchemaComponent {
     @Input()
     selectedEntity;
 
+    @Input()
+    setArrayType
+
     JsonSchema = new JsonSchemaService();
 
     // change the model type
@@ -52,9 +55,9 @@ export class SelectSchemaJsonSchemaComponent {
         if (event) {
             event.stopPropagation();
         }
-        if (this.openMenu) {
-            this.openMenu();
-        }
+        // if (this.openMenu) {
+        //     this.openMenu();
+        // }
     };
 
     manageModelProps(type, entity, action) {

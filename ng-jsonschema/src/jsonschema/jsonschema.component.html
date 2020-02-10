@@ -4,6 +4,21 @@
         <!-- uib-tab -->
 
         <div class="w3-bar w3-black">
+            <h3>Models</h3>
+            <button *ngFor="let model of models; let i = index" (click)="editModel(i)">{{model.name}}</button>
+            <button class="btn btn-link btn-href glyphicon glyphicon-plus obj-add" (click)="addModelForm()"
+                type="button">✚</button>
+            <div *ngIf="">
+                <input type="text" [(ngModel)]="model.name">
+                <button (click)="addModel()">Add</button>
+            </div>
+
+        </div>
+
+        <h2>{{model.name}}</h2>
+
+
+        <div class="w3-bar w3-black">
             <button (click)="convertSchema2Obj()">Designer</button>
             <button (click)="convertObj2Schema()">JSON Schema</button>
         </div>
@@ -18,7 +33,7 @@
                     </div>
                     <div *ngIf="showSelectorModal" class="model-type-selector" id="model-type-selector">
                         <ng-jsonschema-selectschema [selectedEntity]="selectedEntity"
-                        [openMenu]="toggleSelectorModal.bind(this)"
+                            [openMenu]="toggleSelectorModal.bind(this)" [setArrayType]="setArrayType.bind(this)"
                             [modelChangesCallback]="modelChangesCallback.bind(this)" [modelRef]="modelRef"
                             [configs]="configs"></ng-jsonschema-selectschema>
                     </div>

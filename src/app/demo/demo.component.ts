@@ -8,7 +8,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./demo.component.css']
 })
 export class DemoComponent implements OnInit {
-  refModels;
+  models;
   schema;
   data;
 
@@ -17,8 +17,9 @@ export class DemoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.refModels = {
-      '1496757761729': {
+    this.models = [
+      {
+
         'name': 'User',
         'nameSpace': 'user',
         'data': {
@@ -30,33 +31,39 @@ export class DemoComponent implements OnInit {
           }
         }
       },
-      '1497245758395': {
+      {
         'name': 'Address',
         'nameSpace': 'address',
         'data': {
           'type': ['object']
         }
-      }
-    };
-
-    this.schema = {
-      'type': 'object',
-      'properties': {
-        'name': {
-          'type': 'string',
-          'minLength': 3,
-          'maxLength': 255
-        },
-        'age': {
-          'type': 'integer',
-          'minimum': 18
-        }
       },
-      'required': [
-        'name',
-        'age'
-      ]
-    };
+      {
+        'name': 'Person',
+        'nameSpace': 'person',
+        'data': {
+          'type': 'object',
+          'properties': {
+            'name': {
+              'type': 'string',
+              'minLength': 3,
+              'maxLength': 255
+            },
+            'age': {
+              'type': 'integer',
+              'minimum': 18
+            }
+          },
+          'required': [
+            'name',
+            'age'
+          ]
+        }
+      }
+
+    ];
+
+    this.schema = this.models[0];
   }
 
 }

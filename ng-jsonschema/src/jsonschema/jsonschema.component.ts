@@ -16,13 +16,15 @@ export class JsonSchemaComponent implements OnInit {
     @ViewChild(JsonEditorComponent) editor: JsonEditorComponent; // , { static: true }
 
     @Input()
-    schema: any = {};
+    schema: any = null;
 
     @Input()
-    refModels: any = {};
+    models: any = [];
+
+    model: any = null;
 
     showSelectorModal = false;
-    models;
+    showAddModelForm = false;
 
     heading = 'Designer';
 
@@ -53,10 +55,8 @@ export class JsonSchemaComponent implements OnInit {
     JsonSchema = new JsonSchemaService();
 
     constructor(private state: StateService) {
-        this.editorOptions = new JsonEditorOptions()
+        this.editorOptions = new JsonEditorOptions() // this.options.mode = 'code'; //set only one mode
         this.editorOptions.modes = ['code', 'text', 'tree', 'view']; // set all allowed modes
-        //this.options.mode = 'code'; //set only one mode
-
         this.state.getState().subscribe(
             res => {
                 this.showSelectorModal = res.showSelectorModal;
@@ -67,9 +67,15 @@ export class JsonSchemaComponent implements OnInit {
         );
     }
     ngOnInit() {
-        this.data = this.JsonSchema.schema2obj(this.schema);
-        this.data.root$$ = true;
-        this.initRootElement();
+        if (!this.model) {
+            this.model = this.models[0];
+        }
+        if (this.model) {
+            this.schema = this.model.data;
+            this.data = this.JsonSchema.schema2obj(this.schema);
+            this.data.root$$ = true;
+            this.initRootElement();
+        }
     }
 
     str(data) {
@@ -359,5 +365,23 @@ export class JsonSchemaComponent implements OnInit {
             this.modelChangesCallback(entity);
         }
         this.state.setSelectorModel(!this.showSelectorModal);
+    }
+
+    /**
+     * MODELS
+     */
+    editModel(index) {
+        this.model = this.models[index];
+        this.ngOnInit();
+    }
+    addModelForm() {
+        this.showAddModelForm = true;
+    }
+    addModel() {
+        this.showAddModelForm = true;
+        this.models.push({
+            name: 'New Model',
+            schema: {}
+        })
     }
 }

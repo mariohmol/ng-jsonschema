@@ -1,7 +1,7 @@
 <div class="objCont" *ngIf="entity && entity._type">
     <fieldset [disabled]="entity.disabled">
         <div class="js-row" [ngClass]="showDetailsPan?'t_bg':''">
-            
+
             <span [hidden]="(mode == 'list' || mode == 'static')&& entity.root$$">
                 <span class="glyphicon t_color obj-exp"
                     [ngClass]="ctrl.expanded?'glyphicon-triangle-bottom':'glyphicon-triangle-right'"
@@ -10,8 +10,9 @@
                     <span *ngIf="!ctrl.expanded">+</span>
                 </span>
                 <span [hidden]="entity.root$$">
-                    <input [readonly]="mode == 'static'" class="model-key" type="text"
-                        [(ngModel)]="entity._key" />:</span>
+                    <input [readonly]="mode == 'static'" class="model-key" type="text" [(ngModel)]="entity._key" />
+                    <!-- : -->
+                </span>
                 <span uib-dropdown class="dropdown">
 
                     <button type="button" uib-dropdown-toggle
@@ -22,11 +23,11 @@
                                 class="unspecified">[
                                 {{entity._items[0]._type[0]?entity._items[0]._type[0]:'Unspecified'}}
                                 <span *ngIf="entity._items[0]._type[0]=='$ref'">
-                                    (#/definitions/{{$models[entity._items[0]._value].nameSpace}})</span> ]
+                                    (#/definitions/{{models[entity._items[0]._value].nameSpace}})</span> ]
                             </span>
-                            <span *ngIf="t==='$ref'"
-                                class="faint">(#/definitions/{{$models[entity._value].nameSpace}})</span>
-                            <span *ngIf="!$last" class="faint"> or </span>
+                            <span *ngIf="t==='$ref' && models"
+                                class="faint">(#/definitions/{{models[entity._value].nameSpace}})</span>
+                            <!-- <span *ngIf="!$last" class="faint"> or </span> -->
                         </span>
                         <span class="caret"></span>
                     </button>
@@ -119,8 +120,8 @@
             </div>
         </div>
         <button type="button" class="btn btn-link btn-href glyphicon glyphicon-plus obj-add"
-                (click)="addNewProp(entity,data,$event,entity._type.indexOf('Object')<0 && checkTypeObject(entity) ? true: false)"
-                [disabled]="mode == 'static'"
-                *ngIf="(entity._type.indexOf('Object')>=0) || checkTypeObject(entity)">&#10010;</button>
+            (click)="addNewProp(entity,data,$event,entity._type.indexOf('Object')<0 && checkTypeObject(entity) ? true: false)"
+            [disabled]="mode == 'static'"
+            *ngIf="(entity._type.indexOf('Object')>=0) || checkTypeObject(entity)">&#10010;</button>
     </fieldset>
 </div>
