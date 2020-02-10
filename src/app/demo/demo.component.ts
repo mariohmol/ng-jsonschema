@@ -19,7 +19,6 @@ export class DemoComponent implements OnInit {
   ngOnInit(): void {
     this.models = [
       {
-
         'name': 'User',
         'nameSpace': 'user',
         'data': {

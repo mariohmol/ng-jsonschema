@@ -141,9 +141,6 @@ export class JsonSchemaComponent implements OnInit {
         const apic = this.JsonSchema.newString(name);
 
         entity._properties.push({ [name]: apic });
-        setTimeout(function () {
-            // TODO: angular.element(e.currentTarget).parents('.objCont').find('.propCont').last().find('.model-key').focus();
-        });
         return;
 
         /*if (entity.__ID__ === data.__ID__) {
@@ -169,9 +166,6 @@ export class JsonSchemaComponent implements OnInit {
         }
         const apic = this.JsonSchema.newString('');
         entity._items[0]._properties.push({ '': apic });
-        setTimeout(function () {
-            // TODO: angular.element(e.currentTarget).parents('.objCont').find('.propCont').last().find('.model-key').focus();
-        });
     };
 
     // callback after the model changed
@@ -337,29 +331,7 @@ export class JsonSchemaComponent implements OnInit {
 
         return lastId;
     }
-    /**
-     *
-     * @param entity
-     *
-     *
-     *
-        // openMenu(entity, e) {
-        //     const target = e.currentTarget;
-        //     // this.showSelector = true;
-        //     this.modelChangesCallback(entity);
-        //     const left = e.clientX;
-        //     let top = e.clientY + 15;
-        //     const popHeight = 270; // max height of the popup
-        //     const winHeight = window.innerHeight;
-        //     if (winHeight - top < popHeight) {
-        //         top = winHeight - popHeight;
-        //     }
-        //     // TODO: angular.element(target).parents('.json-schema').find('#model-type-selector')
-        //     // .css({ 'top': top + 'px', 'left': left + 'px' }).show();
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        // };
-     */
+
     toggleSelectorModal(entity = null, e = null) {
         if (entity) {
             this.modelChangesCallback(entity);
@@ -371,17 +343,39 @@ export class JsonSchemaComponent implements OnInit {
      * MODELS
      */
     editModel(index) {
+        if (this.model) {
+            const schema = this.JsonSchema.obj2schema(this.data, this.models);
+            this.model.data = schema;
+        }
         this.model = this.models[index];
         this.ngOnInit();
     }
+
     addModelForm() {
         this.showAddModelForm = true;
     }
+
     addModel() {
         this.showAddModelForm = true;
         this.models.push({
             name: 'New Model',
             schema: {}
         })
+    }
+
+    downloadJSON() {
+        const filename = this.model.name + '.json';
+        const text = this.str(this.model.data);
+        this.download(filename, text)
+    }
+
+    download(filename, text) {
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
     }
 }
