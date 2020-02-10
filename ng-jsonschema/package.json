@@ -1,6 +1,6 @@
 {
   "name": "ng-jsonschema",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "homepage": "https://github.com/mariohmol/ng-jsonschema",
   "repository": {
@@ -11,8 +11,7 @@
   "keywords": [
     "angular",
     "ng-jsonschema",
-    "cpf cnpj dual telefone",
-    "utils"
+    "jsonschema"
   ],
   "peerDependencies": {
     "@angular/core": ">=4.0.0 <8.0.0",

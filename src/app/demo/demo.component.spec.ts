@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DemoComponent } from './demo.component';
 import { routes } from '../app.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TextMaskModule } from 'angular2-text-mask';
 import {
   RouterTestingModule
 } from '@angular/router/testing';
@@ -17,7 +16,7 @@ describe('DemoComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
-        TextMaskModule,
+        NgJsonSchema,
         NgJsonSchema.forRoot(),
         RouterTestingModule.withRoutes(routes)
       ],

@@ -1,6 +1,6 @@
 {
   "name": "ng-jsonschema",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "license": "MIT",
   "scripts": {
@@ -28,11 +28,13 @@
     "@angular/platform-browser": "^7.1.4",
     "@angular/platform-browser-dynamic": "^7.1.4",
     "@angular/router": "^7.1.4",
+    "@progress/kendo-file-saver": "^1.0.7",
     "ang-jsoneditor": "^1.9.1",
     "angular2-text-mask": "^8.0.4",
     "core-js": "^2.4.1",
     "js-brasil": "^2.0.7",
     "jsoneditor": "^8.5.3",
+    "jszip": "^3.2.2",
     "rxjs": "^6.2.2",
     "text-mask-addons": "^3.7.2",
     "tslib": "^1.9.0",
