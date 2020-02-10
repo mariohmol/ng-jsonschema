@@ -126,13 +126,15 @@ export class JsonSchemaComponent implements OnInit {
 
     // recursively fine the parent and add the entity
     addNewProp(entity, data, e, forArray) {
+        console.log(entity, data, e, forArray)
         if (forArray) {
             this.addNewPropArrObj(entity, data, e);
             return;
         }
-        const apic = this.JsonSchema.newString('');
+        const name = 'New Field ' + (entity._properties.length + 1);
+        const apic = this.JsonSchema.newString(name);
 
-        entity._properties.push({ '': apic });
+        entity._properties.push({ [name]: apic });
         setTimeout(function () {
             // TODO: angular.element(e.currentTarget).parents('.objCont').find('.propCont').last().find('.model-key').focus();
         });
@@ -208,7 +210,7 @@ export class JsonSchemaComponent implements OnInit {
     }
 
     removeEntity(entity) {
-        const res = this.removeModel(this.data, entity.__ID__);
+        const res = this.removeModel(this.entity, entity.__ID__);
         if (res !== undefined) {
             this.data._properties.splice(res, 1);
         }
@@ -264,7 +266,8 @@ export class JsonSchemaComponent implements OnInit {
         const schema = this.JsonSchema.obj2schema(this.data, this.models);
         console.log(this.data);
         this.schema = {
-            original: JSON.stringify(schema, null, '    '),
+            json: schema,
+            text: JSON.stringify(schema, null, '    '),
             dup: JSON.stringify(schema, null, '    ')
         };
         this.heading = 'JSON Schema';
@@ -351,9 +354,10 @@ export class JsonSchemaComponent implements OnInit {
         //     e.stopPropagation();
         // };
      */
-    toggleSelectorModal(entity, e = null) {
-        console.log(entity, e)
-        this.modelChangesCallback(entity);
+    toggleSelectorModal(entity = null, e = null) {
+        if (entity) {
+            this.modelChangesCallback(entity);
+        }
         this.state.setSelectorModel(!this.showSelectorModal);
     }
 }

@@ -201,11 +201,10 @@ export class JsonSchemaService {
                         schema.required = [];
                         for (let i = 0; i < entity._properties.length; i++) {
                             const o = entity._properties[i];
+                            // tslint:disable-next-line: forin
                             for (const key in o) {
-                                if (!key) {
-                                    continue;
-                                }
                                 const val = o[key];
+
                                 if (val && val._type) {
                                     const res = this.obj2schema(val, models);
                                     schema.properties[val._key] = res;

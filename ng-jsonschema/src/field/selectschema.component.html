@@ -2,8 +2,12 @@
 <!-- var modelSelectorSchema = ' -->
 
 <div class="model-type-selector-cont">
-    <div class="title t_color">Model Type</div>
-    <div class="selectmultiple">Hold Ctrl key to select multiple</div>
+    <div class="title t_color">Model Type
+        <small>Hold Ctrl key to select multiple</small>
+    </div>
+    <div class="selectmultiple">
+        <button (click)="openMenu()">x</button>
+    </div>
     <div class="model-types">
         <button type="button" class="btn btn-link btn-sm"
             [ngClass]="configs.currModelType.indexOf('Array')>=0?'t_bg':''"
@@ -61,12 +65,15 @@
     <div *ngIf="configs.showMoreOptn == '$ref' || configs.extraArrayOptn">
         <div class="title t_color">Select model</div>
         <div class="array-items">
-            <select class="setmodel" (click)="$event.stopPropagation()" 
+            <select class="setmodel" *ngIf="models"
+            (click)="$event.stopPropagation()" 
             (change)="setModelFor$Ref()"
                 [(ngModel)]="modelRef.model">
                 <option *ngFor="let id of keys(models)" value="{{id}}">#/definitions/{{models[id].nameSpace}}
                     ({{models[id].name}})</option>
             </select>
+
+            <span *ngIf="!models">No models found</span>
         </div>
     </div>
 </div>

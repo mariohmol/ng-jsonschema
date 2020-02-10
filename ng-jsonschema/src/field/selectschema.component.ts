@@ -17,11 +17,13 @@ export class SelectSchemaJsonSchemaComponent {
     @Input()
     modelChangesCallback;
 
-    JsonSchema = new JsonSchemaService();
+    @Input()
+    openMenu;
 
     @Input()
     selectedEntity;
 
+    JsonSchema = new JsonSchemaService();
 
     // change the model type
     changeModelType(type, entity, event) {
@@ -49,6 +51,9 @@ export class SelectSchemaJsonSchemaComponent {
         this.modelChangesCallback(entity);
         if (event) {
             event.stopPropagation();
+        }
+        if (this.openMenu) {
+            this.openMenu();
         }
     };
 

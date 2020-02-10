@@ -18,6 +18,7 @@
                     </div>
                     <div *ngIf="showSelectorModal" class="model-type-selector" id="model-type-selector">
                         <ng-jsonschema-selectschema [selectedEntity]="selectedEntity"
+                        [openMenu]="toggleSelectorModal.bind(this)"
                             [modelChangesCallback]="modelChangesCallback.bind(this)" [modelRef]="modelRef"
                             [configs]="configs"></ng-jsonschema-selectschema>
                     </div>
@@ -26,7 +27,7 @@
         </div>
         <div index="1" heading="JSON Schema" *ngIf="heading==='JSON Schema'">
 
-            <json-editor *ngIf="schema" [options]="editorOptions" [data]="data">
+            <json-editor *ngIf="schema && schema.json" [options]="editorOptions" [data]="schema.json">
             </json-editor>
 
             <!-- <pre ui-ace="{mode: 'json'}" [(ngModel)]="schema.original" class="highlight">{{schema.original}}</pre> -->

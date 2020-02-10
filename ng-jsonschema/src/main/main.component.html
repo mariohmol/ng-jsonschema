@@ -1,16 +1,13 @@
 <div class="objCont" *ngIf="entity && entity._type">
     <fieldset [disabled]="entity.disabled">
         <div class="js-row" [ngClass]="showDetailsPan?'t_bg':''">
-            <button type="button" class="btn btn-link btn-href glyphicon glyphicon-plus obj-add"
-                (click)="addNewProp(entity,data,$event,entity._type.indexOf('Object')<0 && checkTypeObject(entity) ? true: false)"
-                [disabled]="mode == 'static'"
-                *ngIf="(entity._type.indexOf('Object')>=0) || checkTypeObject(entity)">&#10010;</button>
+            
             <span [hidden]="(mode == 'list' || mode == 'static')&& entity.root$$">
                 <span class="glyphicon t_color obj-exp"
                     [ngClass]="ctrl.expanded?'glyphicon-triangle-bottom':'glyphicon-triangle-right'"
                     (click)="ctrl.expanded=!ctrl.expanded" *ngIf="entity._type.indexOf('Object')>=0">
-                    <span *ngIf="ctrl.expanded">+</span>
-                    <span *ngIf="!ctrl.expanded">-</span>
+                    <span *ngIf="ctrl.expanded">-</span>
+                    <span *ngIf="!ctrl.expanded">+</span>
                 </span>
                 <span [hidden]="entity.root$$">
                     <input [readonly]="mode == 'static'" class="model-key" type="text"
@@ -112,6 +109,7 @@
                 </div>
             </div>
         </div>
+        <!-- ITEMS: {{entity._items}} -->
         <div *ngIf="entity._type.indexOf('Object')<0 && checkTypeObject(entity) && entity._items[0]">
             <div *ngFor="let prop of entity._items[0]._properties" class="propCont">
                 <div *ngFor="let key of keys(prop); ">
@@ -120,5 +118,9 @@
                 </div>
             </div>
         </div>
+        <button type="button" class="btn btn-link btn-href glyphicon glyphicon-plus obj-add"
+                (click)="addNewProp(entity,data,$event,entity._type.indexOf('Object')<0 && checkTypeObject(entity) ? true: false)"
+                [disabled]="mode == 'static'"
+                *ngIf="(entity._type.indexOf('Object')>=0) || checkTypeObject(entity)">&#10010;</button>
     </fieldset>
 </div>
