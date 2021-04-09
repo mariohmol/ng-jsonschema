@@ -20,7 +20,7 @@ export const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     NgJsonSchema,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })
   ],
   providers: [],
   bootstrap: [AppComponent]

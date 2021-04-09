@@ -39,7 +39,7 @@ export const NgBrDirectives = {
   ]
 })
 class NgJsonSchema {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<NgJsonSchema> {
     return {
       ngModule: NgJsonSchema
     };

@@ -26,6 +26,12 @@ export class SelectSchemaJsonSchemaComponent {
     @Input()
     setArrayType
 
+    @Input()
+    mode;
+
+    @Input()
+    entity;
+
     JsonSchema = new JsonSchemaService();
 
     // change the model type
